@@ -2,43 +2,7 @@
 # See LICENSE for details.
 
 import random
-
-import pandas as pd
-import pkg_resources
-
 from . import constant as cst
-
-
-def resource_to_data(path_to_data):
-    """
-    This is an auxiliar function to read data from a given path, so as to wrap the load
-    process of the static data files from investpy.
-
-    Returns:
-        :obj:`pandas.DataFrame` - data:
-            This function returns a :obj:`pandas.DataFrame` object with all the static file's data
-            retrieved from investpy.
-
-    Raises:
-        FileNotFoundError: raised if the static data file was not found.
-        IOError: raised if the data file is empty or errored.
-
-    """
-
-    resource_package = "investpy"
-    resource_path = "/".join(("resources", path_to_data))
-    if pkg_resources.resource_exists(resource_package, resource_path):
-        data = pd.read_csv(
-            pkg_resources.resource_filename(resource_package, resource_path),
-            keep_default_na=False,
-        )
-    else:
-        raise FileNotFoundError("ERR#0115: data file not found or errored.")
-
-    if data is None:
-        raise IOError("ERR#0115: data file was empty or errored.")
-
-    return data
 
 
 def random_user_agent():
